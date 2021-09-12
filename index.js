@@ -253,8 +253,12 @@ client.connect((err) => {
             // consumers: users[user],
             // countByUser: users[user].length,
             stick_sales: users[user]
-              .filter((x) => x.sales_status === "1_stick_trial")
-              .slice(0, 5)
+              .filter(
+                (x) =>
+                  x.sales_status === "1_Stick_trial" ||
+                  x.sales_status === "2-3_Stick_trial"
+              )
+              .slice(0, 2)
               .map((d) => {
                 let datas = {};
                 (datas.id = d._id),
@@ -267,16 +271,21 @@ client.connect((err) => {
             packet_sales: users[user]
               .filter(
                 (x) =>
-                  x.sales_status === "Lighter_VAO" ||
-                  x.sales_status === "Plastic_sachet"
+                  x.sales_status === "Pack_Purchase" ||
+                  x.sales_status === "Paper_sachet_(4-5 sticks)"
               )
               .slice(
                 0,
-                users[user].filter((x) => x.sales_status === "1_stick_trial")
-                  .length < 5
-                  ? 6 -
+                users[user].filter(
+                  (x) =>
+                    x.sales_status === "1_Stick_trial" ||
+                    x.sales_status === "2-3_Stick_trial"
+                ).length < 2
+                  ? 3 -
                       users[user].filter(
-                        (x) => x.sales_status === "1_stick_trial"
+                        (x) =>
+                          x.sales_status === "1_Stick_trial" ||
+                          x.sales_status === "2-3_Stick_trial"
                       ).length
                   : 1
               )
@@ -362,19 +371,15 @@ client.connect((err) => {
             new_stick_sales: users[user]
               .filter(
                 (x) =>
-                  x.sales_status === "1_stick_trial" &&
+                  (x.sales_status === "1_Stick_trial" ||
+                    x.sales_status === "2-3_Stick_trial") &&
                   x.for_d === null &&
-                  (x.answer10 === null || x.answer10 === undefined)
+                  (x.answer6 === null || x.answer6 === undefined)
               )
               .slice(
                 0,
-                users[user].filter(
-                  (x) => x.answer10 === "yes" || x.answer10 === "no"
-                ).length < 5
-                  ? 5 -
-                      users[user].filter(
-                        (x) => x.answer10 === "yes" || x.answer10 === "no"
-                      ).length
+                users[user].filter((x) => x.answer6 === "yes").length < 2
+                  ? 2 - users[user].filter((x) => x.answer6 === "yes").length
                   : 0
               )
               .map((d) => {
@@ -390,15 +395,13 @@ client.connect((err) => {
               .filter(
                 (x) =>
                   x.for_d === null &&
-                  (x.sales_status === "Lighter_VAO" ||
-                    x.sales_status === "Plastic_sachet") &&
-                  (x.answer10 === null || x.answer10 === undefined)
+                  (x.sales_status === "Pack_Purchase" ||
+                    x.sales_status === "Paper_sachet_(4-5 sticks)") &&
+                  (x.answer6 === null || x.answer6 === undefined)
               )
               .slice(
                 0,
-                users[user].filter(
-                  (x) => x.answer10 === "yes" || x.answer10 === "no"
-                ).length < 1
+                users[user].filter((x) => x.answer6 === "yes").length < 1
                   ? 1
                   : 0
               )
