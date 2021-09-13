@@ -85,7 +85,7 @@ client.connect((err) => {
             answer6: answers.ans6,
             answer7: answers.ans7,
             answer7dot1: answers.ans7dot1,
-            answer: answers.ans8,
+            answer8: answers.ans8,
             answer9: answers.ans9,
             answer10dot1: answers.ans10dot1,
             answer10dot2: answers.ans10dot2,
