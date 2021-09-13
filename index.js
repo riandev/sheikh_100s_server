@@ -272,7 +272,7 @@ client.connect((err) => {
               .filter(
                 (x) =>
                   x.sales_status === "Pack_Purchase" ||
-                  x.sales_status === "Paper_sachet_(4-5 sticks)"
+                  x.sales_status === "Paper_sachet"
               )
               .slice(
                 0,
@@ -396,7 +396,7 @@ client.connect((err) => {
                 (x) =>
                   x.for_d === null &&
                   (x.sales_status === "Pack_Purchase" ||
-                    x.sales_status === "Paper_sachet_(4-5 sticks)") &&
+                    x.sales_status === "Paper_sachet") &&
                   (x.answer6 === null || x.answer6 === undefined)
               )
               .slice(
