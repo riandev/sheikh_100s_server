@@ -258,7 +258,26 @@ client.connect((err) => {
                   x.sales_status === "1_Stick_trial" ||
                   x.sales_status === "2-3_Stick_trial"
               )
-              .slice(0, 2)
+              .slice(
+                0,
+                users[user].filter(
+                  (x) =>
+                    x.sales_status === "Pack_Purchase" ||
+                    x.sales_status === "Paper_sachet"
+                ).length === 0 ||
+                  users[user].filter(
+                    (x) =>
+                      x.sales_status === "Pack_Purchase" ||
+                      x.sales_status === "Paper_sachet"
+                  ).length === null ||
+                  users[user].filter(
+                    (x) =>
+                      x.sales_status === "Pack_Purchase" ||
+                      x.sales_status === "Paper_sachet"
+                  ).length === undefined
+                  ? 3
+                  : 2
+              )
               .map((d) => {
                 let datas = {};
                 (datas.id = d._id),
